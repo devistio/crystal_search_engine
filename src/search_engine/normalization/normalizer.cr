@@ -4,8 +4,7 @@ module SearchEngine
   module Normalization
     class Normalizer
       def initialize(@stopwords = Defaults::STOPWORDS, @punctation = Defaults::PUNCTUATION,
-        @ignore_single_quotes = true)
-      end
+        @ignore_single_quotes = true) end
 
       def normalize(text, stopwords = @stopwords, punctation = @punctation)
         words = text.downcase.split(get_splitter_regex(punctation))
