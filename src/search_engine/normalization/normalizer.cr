@@ -5,7 +5,11 @@ module SearchEngine
     # Used to normalize text before indexing. Default (English) stopwords and
     # punctuation are provided, although functionality exists for custom
     # parameters.
-    class Normalizer
+    struct Normalizer
+      property stopwords
+      property punctuation
+      property ignore_single_quotes
+
       def initialize(@stopwords = Defaults::STOPWORDS, @punctuation = Defaults::PUNCTUATION,
         @ignore_single_quotes = true)
       end
