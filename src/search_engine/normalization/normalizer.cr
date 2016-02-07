@@ -2,11 +2,16 @@ require "./defaults"
 
 module SearchEngine
   module Normalization
+    # Used to normalize text before indexing. Default (English) stopwords and
+    # punctation are provided, although functionality exists for custom
+    # parameters.
     class Normalizer
       def initialize(@stopwords = Defaults::STOPWORDS, @punctation = Defaults::PUNCTUATION,
-        @ignore_single_quotes = true) end
+        @ignore_single_quotes = true)
+      end
 
-      def normalize(text, stopwords = @stopwords, punctation = @punctation)
+      # Normalizes text by eliminating whitespace, stopwords, and punctation.
+      def normalize(text)
         words = text.downcase.split(get_splitter_regex(punctation))
 
         words.reduce([] of String) do |normalized_words, word|
