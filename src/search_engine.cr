@@ -1,5 +1,4 @@
-require "./search_engine/*"
+require "./search_engine/normalization/normalizer"
 
 module SearchEngine
-  # TODO Put your code here
 end

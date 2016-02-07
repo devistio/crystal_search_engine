@@ -1,14 +1,17 @@
+require "./defaults"
+
 module SearchEngine
   module Normalization
     class Normalizer
-      def initialize(@stopwords, @punctation, @ignore_quotes)
+      def initialize(@stopwords = Defaults::STOPWORDS, @punctation = Defaults::PUNCTUATION,
+        @ignore_single_quotes = true)
       end
 
       def normalize(text, stopwords = @stopwords, punctation = @punctation)
         words = text.downcase.split(get_splitter_regex(punctation))
 
         words.reduce([] of String) do |normalized_words, word|
-          word = strip_single_quotes(word) if @ignore_quotes
+          word = strip_single_quotes(word) if @ignore_single_quotes
 
           normalized_words << word unless @stopwords.includes?(word) || word.empty?
           normalized_words

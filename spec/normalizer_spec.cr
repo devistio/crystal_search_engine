@@ -4,9 +4,17 @@ include SearchEngine::Normalization
 
 describe Normalizer do
   it "#normalize simple" do
-    norm   = Normalizer.new(%w(), "", true)
+    norm   = Normalizer.new(%w(), "", false)
     text   = "The rat the cat the dog chased killed ate the malt, dude."
     output = %w(the rat the cat the dog chased killed ate the malt, dude.)
+
+    norm.normalize(text).should eq(output)
+  end
+
+  it "#normalize with single quotes" do
+    norm   = Normalizer.new(%w(), "", true)
+    text   = "It's Chris' cat."
+    output = %w(it's chris cat.)
 
     norm.normalize(text).should eq(output)
   end
@@ -20,7 +28,7 @@ describe Normalizer do
   end
 
   it "#normalize stopwords" do
-    norm   = Normalizer.new(%w(the), "", true)
+    norm   = Normalizer.new(%w(the), "", false)
     text   = "The rat the cat the dog chased killed ate the malt, dude."
     output = %w(rat cat dog chased killed ate malt, dude.)
 
@@ -28,7 +36,7 @@ describe Normalizer do
   end
 
   it "#normalize punctation stopwords" do
-    norm   = Normalizer.new(%w(the), ",.", true)
+    norm   = Normalizer.new(%w(the), ",.", false)
     text   = "The rat the cat the dog chased killed ate the malt, dude."
     output = %w(rat cat dog chased killed ate malt dude)
 
