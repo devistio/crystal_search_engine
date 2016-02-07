@@ -42,4 +42,12 @@ describe Normalizer do
 
     norm.normalize(text).should eq(output)
   end
+
+  it "#normalize default args" do
+    norm   = Normalizer.new
+    text   = "So, it's 'about' these."
+    output = %w()
+
+    norm.normalize(text).should eq(output)
+  end
 end
