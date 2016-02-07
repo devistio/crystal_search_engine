@@ -12,7 +12,7 @@ module SearchEngine
 
       # Normalizes text by eliminating whitespace, stopwords, and punctuation.
       def normalize(text)
-        words = text.downcase.split(get_splitter_regex(punctuation))
+        words = text.downcase.split(get_splitter_regex(@punctuation))
 
         words.reduce([] of String) do |normalized_words, word|
           word = strip_single_quotes(word) if @ignore_single_quotes
