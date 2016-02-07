@@ -2,7 +2,12 @@ require "xml"
 
 module SearchEngine
   module Extraction
-    class Extractor
+    struct Extractor
+      property links
+      property texts
+      property raw_html
+      property xml
+
       def initialize(@raw_html)
         @links = nil
         @texts = nil
@@ -14,12 +19,11 @@ module SearchEngine
 
         @xml ||= XML.parse_html(@raw_html)
 
-        if xml = @xml
-          links = xml.xpath_nodes("//a").map(&.["href"]?)
-          return @links = links.compact.reject(&.empty?)
+        @links = if xml = @xml
+          xml.xpath_nodes(%(//a[@href!=""])).map(&.["href"])
+        else
+          %w()
         end
-
-        @links = %w()
       end
 
       def extract_texts
@@ -27,12 +31,11 @@ module SearchEngine
 
         @xml ||= XML.parse_html(@raw_html)
 
-        if xml = @xml
-          texts = xml.xpath_nodes("//text()").map(&.text)
-          return @texts = texts.compact.map(&.strip).reject(&.empty?)
+        @texts = if xml = @xml
+          xml.xpath_nodes("//text()[normalize-space()]").map(&.text).compact
+        else
+          %w()
         end
-
-        @texts = %w()
       end
     end
   end
