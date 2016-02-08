@@ -1,7 +1,7 @@
 require "xml"
 
 module SearchEngine
-  module Crawler
+  module Crawl
     module Extraction
       # Extracs links and text from an HTML page.
       struct Extractor

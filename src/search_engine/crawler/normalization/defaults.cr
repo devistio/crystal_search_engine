@@ -1,5 +1,5 @@
 module SearchEngine
-  module Crawler
+  module Crawl
     module Normalization
       # Defaults for text normalization done by
       # SearchEngine::Normalization::Normalizer.

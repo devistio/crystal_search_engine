@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-include SearchEngine::Crawler::Extraction
+include SearchEngine::Crawl::Extraction
 
 describe Extractor do
   html = %(

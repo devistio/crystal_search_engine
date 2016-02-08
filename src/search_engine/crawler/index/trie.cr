@@ -1,5 +1,5 @@
 module SearchEngine
-  module Crawler
+  module Crawl
     module Index
       # Used to keep track of word occurences; essentially a memory-efficient
       # (String => Int32) map.
