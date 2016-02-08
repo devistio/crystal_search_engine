@@ -2,6 +2,7 @@ require "xml"
 
 module SearchEngine
   module Extraction
+    # Extracs links and text from an HTML page.
     struct Extractor
       property links
       property texts
@@ -14,6 +15,10 @@ module SearchEngine
         @xml   = nil
       end
 
+      # Extracts the links from the HTML.
+      #
+      # Returns an array containing the URL of the `href` attribute as a string
+      # of each `<a>` tag as a String.
       def extract_links
         return @links if @links
 
@@ -26,6 +31,9 @@ module SearchEngine
         end
       end
 
+      # Extracts the contents of all the text nodes from the HTML.
+      #
+      # Returns an array containing each text node's content as a string.
       def extract_texts
         return @texts if @texts
 
