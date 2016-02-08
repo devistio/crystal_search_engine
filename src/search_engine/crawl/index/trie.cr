@@ -9,6 +9,11 @@ module SearchEngine
           @counts = Hash(String, Int32).new(0)
         end
 
+        def clear
+          @out.clear
+          @counts.clear
+        end
+
         # Increments the count of a given word in a given document.
         def insert(word, document, count = 1)
           return @counts[document] += count if word.empty?
