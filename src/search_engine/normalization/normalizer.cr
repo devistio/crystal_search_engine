@@ -18,7 +18,7 @@ module SearchEngine
       def normalize(text)
         words = text.downcase.split(get_splitter_regex(@punctuation))
 
-        words.reduce([] of String) do |normalized_words, word|
+        words.reduce(%w()) do |normalized_words, word|
           word = strip_single_quotes(word) if @ignore_single_quotes
 
           normalized_words << word unless @stopwords.includes?(word) || word.empty?
