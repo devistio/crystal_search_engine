@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-include SearchEngine::Index
+include SearchEngine::Crawler::Index
 
 describe Trie do
   it "empty" do

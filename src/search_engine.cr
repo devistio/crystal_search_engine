@@ -1,6 +1,6 @@
-require "./search_engine/extractor"
-require "./search_engine/index/trie"
-require "./search_engine/normalization/normalizer"
+require "./search_engine/crawler/extractor"
+require "./search_engine/crawler/index/trie"
+require "./search_engine/crawler/normalization/normalizer"
 
 
 module SearchEngine
