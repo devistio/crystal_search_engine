@@ -10,6 +10,12 @@ module SearchEngine
       property punctuation
       property ignore_single_quotes
 
+      # Initializes a Normalizer given the stopwords to ignore as an array of
+      # strings, the punctation to split on as a string, and whether or not to
+      # ignore single quotes at the beginning and end of words.
+      #
+      # Defaults to a standard set of English stopwords and Punctuation (found
+      # in SearchEngine::Normalization::Defaults) and to ignore single quotes.
       def initialize(@stopwords = Defaults::STOPWORDS, @punctuation = Defaults::PUNCTUATION,
         @ignore_single_quotes = true)
       end

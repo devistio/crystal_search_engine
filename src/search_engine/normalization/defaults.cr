@@ -1,8 +1,12 @@
 module SearchEngine
   module Normalization
+    # Defaults for text normalization done by
+    # SearchEngine::Normalization::Normalizer.
     module Defaults
+      # Default set of English punctuation
       PUNCTUATION = "!\"#$%&()*+,-./:;<=>?@[\\]^_`{|}~"
-      
+
+      # Default set of English stopwords
       STOPWORDS = %w(
         a about above after again against all am an
         and any are aren't as at be because been

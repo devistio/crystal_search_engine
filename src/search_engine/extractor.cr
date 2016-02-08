@@ -9,6 +9,7 @@ module SearchEngine
       property raw_html
       property xml
 
+      # Initializes a new Extractor given the HTML to extract from as a string.
       def initialize(@raw_html)
         @links = nil
         @texts = nil
