@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-include SearchEngine::Crawl::Normalization
+include SearchEngine::Crawl::Normalize
 
 describe Normalizer do
   it "#normalize simple" do

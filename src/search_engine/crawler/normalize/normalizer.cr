@@ -2,7 +2,7 @@ require "./defaults"
 
 module SearchEngine
     module Crawl
-      module Normalization
+      module Normalize
       # Used to normalize text before indexing. Default (English) stopwords and
       # punctuation are provided, although functionality exists for custom
       # parameters.
