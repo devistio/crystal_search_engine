@@ -9,9 +9,29 @@ module SearchEngine
           @counts = Hash(String, Int32).new(0)
         end
 
+        # Clear out all of the stored data
         def clear
           @out.clear
           @counts.clear
+        end
+
+        # Retrieves all words stored in the trie as well as their respective
+        # counts.
+        #
+        # Returns a hash where the keys are the strings stored in the trie
+        # and the values are their counts.
+        def get_words_and_counts
+          word_counts = {} of String => Int32
+
+          @out.each do |char, trie|
+            trie.get_words_and_counts.each do |word, count|
+              word_counts[char + word] = count
+            end
+          end
+
+          count = @counts.values.sum
+          word_counts[""] = count if count > 0
+          word_counts
         end
 
         # Increments the count of a given word in a given document.

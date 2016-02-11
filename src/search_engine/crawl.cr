@@ -7,37 +7,43 @@ module SearchEngine
   module Crawl
     class Crawler
       def initialize(@max_pages)
-        @index  = Trie.new
-        @norm   = Normalizer.new
+        @index  = Index::Trie.new
+        @norm   = Normalize::Normalizer.new
         @queue  = %w()
-        @seen   = Set.new
+        @seen   = Set(String).new
       end
 
-      def crawl(@seed)
+      def crawl(seed, local = true)
         clear_all
-        @queue.push(@seed)
+        @queue.push(seed)
         pages = @max_pages
 
-        unless @queue.empty? || pages == 0
+        until @queue.empty? || pages == 0
           url = @queue.shift
           @seen.add(url)
+          next unless html = fetch(url, local)
 
-          response = HTTP::Client.get(url)
-          next unless response.status_code == 200
-
-          extract = Extractor.new(response.body)
+          extract = Extract::Extractor.new(html)
           links   = extract.extract_links
-          @queue.push(*links.reject { |l| @seen.includes?(l) })
-
-          texts = extract.extract_texts
+          @queue += links.reject { |l| @seen.includes?(l) }
+          texts   = extract.extract_texts
+          
           texts.each do |text|
             @norm.normalize(text).each { |word| @index.insert(word, url) }
           end
+
+          pages -= 1
         end
 
         @index
       end
 
+      private def fetch(url, local)
+        return File.read(url) if local
+
+        response = HTTP::Client.get(url)
+        response.status_code == 200 ? response.body : nil
+      end
 
       private def clear_all
         @index.clear
